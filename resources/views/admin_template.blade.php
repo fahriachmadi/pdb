@@ -21,6 +21,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
     <link href="{{ asset("bower_components/admin-lte/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
+	
+	<script src="http://code.jquery.com/jquery-3.2.1.js"
+		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+		crossorigin="anonymous"></script>
+	
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,6 +82,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset ("bower_components/bootstrap/dist/js/bootstrap.min.js") }}" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset ("bower_components/admin-lte/dist/js/adminlte.min.js") }}" type="text/javascript"></script>
+	<script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
+			<script type="text/javascript" src="{{ URL::asset('js/jquery.dropotron.min.js') }}"></script>
+			<script type="text/javascript" src="{{ URL::asset('js/jquery.scrollgress.min.js') }}"></script>
+			<script type="text/javascript" src="{{ URL::asset('js/skel.min.js') }}"></script>
+			<script type="text/javascript" src="{{ URL::asset('js/util.js') }}"></script>
+			<script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
