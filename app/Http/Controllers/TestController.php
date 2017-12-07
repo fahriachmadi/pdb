@@ -46,9 +46,12 @@ class TestController extends Controller {
 		//variable penampung semua prediksi setiap bulan, 
 		$prediksi_pass_all_month = array(0,0,0,0,0,0,0,0,0,0,0,0);
 		$prediksi_seat_all_month = array(0,0,0,0,0,0,0,0,0,0,0,0);
+		
+		$prediksi_pass_all_month_2017 = array(0,0,0,0,0,0,0,0,0,0,0,0);
+		
 		//hitung semua prediksi
 		for ($i = 0; $i < 12; $i++) {
-			$prediksi_pass_all_month[$i] =  $this->hitungPassangerPerBulan(
+			$prediksi_pass_all_month[$i] =  $this->hitungPassangerTreePerBulan(
 										
 					Input::get('airline'),
 					Input::get('originAirport'),
@@ -62,7 +65,7 @@ class TestController extends Controller {
 					$i
 
 			);
-			$prediksi_seat_all_month[$i] =  $this->hitungSeatPerBulan(	
+			$prediksi_seat_all_month[$i] =  $this->hitungSeatTreePerBulan(	
 					Input::get('airline'),
 					Input::get('originAirport'),
 					Input::get('destinationAirport'),
@@ -75,12 +78,28 @@ class TestController extends Controller {
 					$i
 			);		
 			
+			$prediksi_pass_all_month_2017=  $this->hitungPassangerTreePerBulan(
+										
+					Input::get('airline'),
+					Input::get('originAirport'),
+					Input::get('destinationAirport'),
+					Input::get('originState'),
+					Input::get('destinationState'),
+					Input::get('originWac'),
+					Input::get('destinationWac'),
+					Input::get('serviceClass'),
+					2017,
+					$i
+
+			);
+
 		}
 		
-	
+		$year = Input::get('year');
+			
 
 		
-		return view("test" , array('prediksi_seat_all_month' => $prediksi_seat_all_month, 'prediksi_pass_all_month' => $prediksi_pass_all_month) );
+		return view("test" , array('prediksi_seat_all_month' => $prediksi_seat_all_month, 'prediksi_pass_all_month' => $prediksi_pass_all_month, 'prediksi_pass_all_month_2017' => $prediksi_pass_all_month_2017, 'year' => $year) );
 		
 					/*  contoh ambil variable dari controller , bikin ini di blade
 					ya Con nanti hapus setelah lo pake @foreach ($prediksi_seat_all_month as $prediksi_seat_all_month)
@@ -92,10 +111,11 @@ class TestController extends Controller {
 					  @endforeach -->
 					*/
 		
-		
+
     }
+	
 	//model prediksi passanger per bulan
-	public function hitungPassangerPerBulan(
+	public function hitungPassangerTreePerBulan(
 		
 		$airline,
 		$originAirport,
@@ -111,11 +131,12 @@ class TestController extends Controller {
 		//tuliskan algoritma model prediksi passanger per bulan disini
 		//untuk sementara dikasih dummy setiap bulan passangernya 1
 		
+
 		return 1;
 	
 	}
-		//model prediksi seat per bulan
-	public function hitungSeatPerBulan(
+	//model prediksi seat per bulan
+	public function hitungSeatTreePerBulan(
 		$airline,
 		$originAirport,
 		$destinationAirport,
