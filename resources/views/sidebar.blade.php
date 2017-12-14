@@ -31,7 +31,7 @@
         <ul class="sidebar-menu">
             <li class="header">Menu</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><span>Prediksi</span></a></li>
+            <li class="active"><a href="{{ url ('/test') }}"><span>Prediksi</span></a></li>
             <li><a href="#"><span>Lihat Data</span></a></li>
             <!-- <li class="treeview">
                 <a href="#"><span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>

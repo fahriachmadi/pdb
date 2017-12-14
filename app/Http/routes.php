@@ -21,3 +21,4 @@ Route::controllers([
 ]);
 
 Route::get('/test', 'TestController@index');
+Route::get('/test', 'TestController@index_submit');
