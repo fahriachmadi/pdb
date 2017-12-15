@@ -169,6 +169,16 @@ $(document).ready(function() {
 												
 												</th>
 											<tr>
+											<tr>
+												<th>
+												
+															<input type="text" name="seat" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
 								  </table>
 								  </div>
 								</div>
@@ -257,7 +267,7 @@ $(document).ready(function() {
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $prediksi_pass_all_month }}</td>
-                            <td>Unknown</td>
+                            <td></td>
                         </tr>
                     @endforeach
                     @endisset

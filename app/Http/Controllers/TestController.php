@@ -100,6 +100,25 @@ class TestController extends Controller {
 		
 		
 		
+						
+			
+			$pass_all_month_json_2017 = DB::table('all_year_processing_for_ml')->select('month','passengers', 'seat')
+		    	->where([['airline_id', '=', Input::get('airline')],
+		    		['origin_airport_id', '=', Input::get('originAirport')],
+		    		['dest_airport_id', '=', Input::get('destinationAirport')],
+		    		['origin_state_fips', '=', Input::get('originState')],
+		    		['dest_state_fips', '=', Input::get('destinationState')],
+		    		['origin_wac', '=', Input::get('originWac')],
+		    		['dest_wac', '=', Input::get('destinationWac')],
+		    		['class', '=', Input::get('serviceClass')],
+		    		['year', '=', '2017'],
+					
+		    		])
+		    	->get();
+		
+		
+		
+		
 		//hitung semua prediksi
 		for ($i = 0; $i < 12; $i++) {
 			$prediksi_pass_all_month[$i] =  $this->hitungPassangerTreePerBulan(
@@ -113,6 +132,7 @@ class TestController extends Controller {
 					Input::get('destinationWac'),
 					Input::get('serviceClass'),
 					Input::get('year'),
+					Input::get('seat'),
 					$i
 
 			);
@@ -130,6 +150,33 @@ class TestController extends Controller {
 					$i
 			);		
 			
+			
+		
+			
+			$seat_per_bulan_2017 = DB::table('all_year_processing_for_ml')->select('seat')
+		    	->where([['airline_id', '=', Input::get('airline')],
+		    		['origin_airport_id', '=', Input::get('originAirport')],
+		    		['dest_airport_id', '=', Input::get('destinationAirport')],
+		    		['origin_state_fips', '=', Input::get('originState')],
+		    		['dest_state_fips', '=', Input::get('destinationState')],
+		    		['origin_wac', '=', Input::get('originWac')],
+		    		['dest_wac', '=', Input::get('destinationWac')],
+		    		['class', '=', Input::get('serviceClass')],
+		    		['year', '=', '2017'],
+					['month', '=', $i+1],
+		    		])
+		    	->first();
+				
+
+						
+			if($seat_per_bulan_2017==NULL){
+				$seat_per_bulan_2017 = 1000;
+			}
+			else{
+				$seat_per_bulan_2017 = $seat_per_bulan_2017->seat;
+			}
+
+		
 			$prediksi_pass_all_month_2017[$i]=  $this->hitungPassangerTreePerBulan(
 										
 					Input::get('airline'),
@@ -141,28 +188,18 @@ class TestController extends Controller {
 					Input::get('destinationWac'),
 					Input::get('serviceClass'),
 					2017,
+					$seat_per_bulan_2017,
 					$i
 
 			);		
 
 		}
+	
 		$prediksi_pass_all_month = collect($prediksi_pass_all_month);
 		$prediksi_seat_all_month = collect($prediksi_seat_all_month);
 		$prediksi_pass_all_month_2017 = collect($prediksi_pass_all_month_2017);
 
 
-		$pass_all_month_json_2017 = DB::table('all_year_processing_for_ml')->select('month','passengers')
-		    	->where([['airline_id', '=', '21171'],
-		    		['origin_airport_id', '=', '11618'],
-		    		['dest_airport_id', '=', '14771'],
-		    		['origin_state_fips', '=', '34'],
-		    		['dest_state_fips', '=', '6'],
-		    		['origin_wac', '=', '21'],
-		    		['dest_wac', '=', '91'],
-		    		['class', '=', '4'],
-		    		['year', '=', '2017'],
-		    		])
-		    	->get();
 
 
 		//  dd($pass_all_month_json_2017);
@@ -208,6 +245,7 @@ class TestController extends Controller {
 		$destinationWac,
 		$serviceClass,
 		$year,
+		$seat,
 		$month
 	){
 		//tuliskan algoritma model prediksi passanger per bulan disini
