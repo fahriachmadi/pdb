@@ -121,7 +121,9 @@ class TestController extends Controller {
 		
 		//hitung semua prediksi
 		for ($i = 0; $i < 12; $i++) {
-			$prediksi_pass_all_month[$i] =  $this->hitungPassangerTreePerBulan(
+		
+			$seat = "seat".($i+1);
+			$prediksi_pass_all_month[$i] =  $this->hitungPassangerPerBulan(
 										
 					Input::get('airline'),
 					Input::get('originAirport'),
@@ -132,7 +134,7 @@ class TestController extends Controller {
 					Input::get('destinationWac'),
 					Input::get('serviceClass'),
 					Input::get('year'),
-					Input::get('seat'),
+					Input::get($seat),
 					$i
 
 			);
@@ -177,7 +179,7 @@ class TestController extends Controller {
 			}
 
 		
-			$prediksi_pass_all_month_2017[$i]=  $this->hitungPassangerTreePerBulan(
+			$prediksi_pass_all_month_2017[$i]=  $this->hitungPassangerPerBulan(
 										
 					Input::get('airline'),
 					Input::get('originAirport'),
@@ -234,7 +236,7 @@ class TestController extends Controller {
 
 	
 	//model prediksi passanger per bulan
-	public function hitungPassangerTreePerBulan(
+	public function hitungPassangerPerBulan(
 		
 		$airline,
 		$originAirport,
@@ -251,8 +253,14 @@ class TestController extends Controller {
 		//tuliskan algoritma model prediksi passanger per bulan disini
 		//untuk sementara dikasih dummy setiap bulan passangernya 1
 		
+		$year = $year - 1990;
+		
+		
+		$passanger = ($seat *0.7260976892426569 ) + ($airline *-0.19728731897162055 ) +($originAirport *0.006881158839401989 ) +($originState * -3.1278306810716208) +($originWac *1.57068999395737 ) +($destinationAirport * 0.004923284574650348) +($destinationState *-3.0094147883341136 ) + ($destinationWac *1.515088473915461 ) +($month *18.134598817421452 ) +($year * 88.17906077020947) ;
+		
+		
 
-		return 10000;
+		return $passanger;
 	
 	}
 	//model prediksi seat per bulan

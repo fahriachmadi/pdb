@@ -171,14 +171,132 @@ $(document).ready(function() {
 											<tr>
 											<tr>
 												<th>
+												<p>Bulan 1</p>
 												
-															<input type="text" name="seat" placeholder="Masukkan jumlah seat"/>	
+															<input type="text" name="seat1" placeholder="Masukkan jumlah seat"/>	
 				
 												
 												
 												
 												</th>
 											<tr>
+											<tr>
+												<th>
+												<p>Bulan 2</p>
+															<input type="text" name="seat2" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+												<p>Bulan 3</p>
+															<input type="text" name="seat3" placeholder="Masukkan jumlah seat "/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+												<p>Bulan 4</p>
+															<input type="text" name="seat4" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+													<p>Bulan 5</p>
+															<input type="text" name="seat5" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+															<p>Bulan 6</p>
+												
+															<input type="text" name="seat6" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+												<p>Bulan 7</p>
+												
+															<input type="text" name="seat7" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+												<p>Bulan 8</p>
+												
+															<input type="text" name="seat8" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+												<p>Bulan 9</p>
+													
+															<input type="text" name="seat9" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+													<p>Bulan 10</p>
+													
+															<input type="text" name="seat10" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+													<p>Bulan 11</p>
+													
+															<input type="text" name="seat11" placeholder="Masukkan jumlah seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											<tr>
+												<th>
+														<p>Bulan 12</p>
+															<input type="text" name="seat12" placeholder="Masukkan jumlah  seat"/>	
+				
+												
+												
+												
+												</th>
+											<tr>
+											
 								  </table>
 								  </div>
 								</div>
