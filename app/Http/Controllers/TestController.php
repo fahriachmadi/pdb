@@ -98,6 +98,7 @@ class TestController extends Controller {
 		
 		$prediksi_pass_all_month_2017 = array(0,0,0,0,0,0,0,0,0,0,0,0);
 		
+		$keramaian_all_month = array('','','','','','','','','','','','');
 		
 		
 						
@@ -152,7 +153,14 @@ class TestController extends Controller {
 					$i
 			);		
 			
-			
+
+			if(($prediksi_seat_all_month[$i] * 0.8) < $prediksi_pass_all_month[$i]){
+				$keramaian_all_month[$i] = 'Tinggi';
+			}else if(($prediksi_seat_all_month[$i] * 0.7) > $prediksi_pass_all_month[$i]){
+				$keramaian_all_month[$i] = 'Rendah';
+			}else{
+				$keramaian_all_month[$i] = 'Sedang';
+			} 
 		
 			
 			$seat_per_bulan_2017 = DB::table('all_year_processing_for_ml')->select('seat')
@@ -200,7 +208,7 @@ class TestController extends Controller {
 		$prediksi_pass_all_month = collect($prediksi_pass_all_month);
 		$prediksi_seat_all_month = collect($prediksi_seat_all_month);
 		$prediksi_pass_all_month_2017 = collect($prediksi_pass_all_month_2017);
-
+		$keramaian_all_month = collect($keramaian_all_month);
 
 
 
@@ -217,7 +225,7 @@ class TestController extends Controller {
 		//dd($pass_all_month_json_2017);
 
 
-		return view("test" , array('prediksi_pass_all_month' => $prediksi_pass_all_month, 'prediksi_pass_all_month_2017' => $prediksi_pass_all_month_2017, 'pass_all_month_json_2017' => $pass_all_month_json_2017));
+		return view("test" , array('prediksi_pass_all_month' => $prediksi_pass_all_month, 'prediksi_pass_all_month_2017' => $prediksi_pass_all_month_2017, 'pass_all_month_json_2017' => $pass_all_month_json_2017, 'keramaian_all_month' => $keramaian_all_month));
 
 
 					/*  contoh ambil variable dari controller , bikin ini di blade

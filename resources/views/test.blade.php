@@ -345,7 +345,7 @@ $(document).ready(function() {
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Grafik Prediksi</h3>
+                    <h3 class="box8title">Grafik Prediksi</h3>
                     <h5><b>Tahun 2018</b></h5>
                     <div class="box-tools pull-right">
                     	@isset($prediksi_pass_all_month)
@@ -381,11 +381,11 @@ $(document).ready(function() {
                             <th>Tingkat Keramaian</th>
                         </tr>
                     @isset($prediksi_pass_all_month)
-                    @foreach($prediksi_pass_all_month as $prediksi_pass_all_month)
+                    @foreach($prediksi_pass_all_month as $index => $value)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $prediksi_pass_all_month }}</td>
-                            <td></td>
+                            <td>{{ $prediksi_pass_all_month[$index] }}</td>
+                            <td>{{ $keramaian_all_month[$index] }}</td>
                         </tr>
                     @endforeach
                     @endisset
