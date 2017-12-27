@@ -98,6 +98,7 @@ class TestController extends Controller {
 		
 		$prediksi_pass_all_month_2017 = array(0,0,0,0,0,0,0,0,0,0,0,0);
 		
+		$seatpassenger_per_month_2017 = array(0,0,0,0,0,0,0,0,0,0,0,0);
 		$keramaian_all_month = array('','','','','','','','','','','','');
 		
 		
@@ -153,17 +154,10 @@ class TestController extends Controller {
 					$i
 			);		
 			
-
-			if(($prediksi_seat_all_month[$i] * 0.8) < $prediksi_pass_all_month[$i]){
-				$keramaian_all_month[$i] = 'Tinggi';
-			}else if(($prediksi_seat_all_month[$i] * 0.7) > $prediksi_pass_all_month[$i]){
-				$keramaian_all_month[$i] = 'Rendah';
-			}else{
-				$keramaian_all_month[$i] = 'Sedang';
-			} 
+ 
 		
 			
-			$seat_per_bulan_2017 = DB::table('all_year_processing_for_ml')->select('seat')
+			$seatpassenger_per_bulan_2017 = DB::table('all_year_processing_for_ml')->select('seat', 'passengers')
 		    	->where([['airline_id', '=', Input::get('airline')],
 		    		['origin_airport_id', '=', Input::get('originAirport')],
 		    		['dest_airport_id', '=', Input::get('destinationAirport')],
@@ -174,19 +168,20 @@ class TestController extends Controller {
 		    		['class', '=', Input::get('serviceClass')],
 		    		['year', '=', '2017'],
 					['month', '=', $i+1],
-		    		])
-		    	->first();
-				
+		    		])->first();
+		
+
+		    $seatpassenger_per_month_2017[$i] = $seatpassenger_per_bulan_2017;
 
 						
-			if($seat_per_bulan_2017==NULL){
-				$seat_per_bulan_2017 = 1000;
+			if($seatpassenger_per_bulan_2017==NULL){
+				$seatpassenger_per_bulan_2017 = 1000;
 			}
 			else{
-				$seat_per_bulan_2017 = $seat_per_bulan_2017->seat;
+				$seatpassenger_per_bulan_2017 = $seatpassenger_per_bulan_2017->seat;
 			}
-
-		
+		    
+			
 			$prediksi_pass_all_month_2017[$i]=  $this->hitungPassangerPerBulan(
 										
 					Input::get('airline'),
@@ -198,21 +193,33 @@ class TestController extends Controller {
 					Input::get('destinationWac'),
 					Input::get('serviceClass'),
 					2017,
-					$seat_per_bulan_2017,
+					$seatpassenger_per_bulan_2017,
 					$i
 
-			);		
+			);	
 
+			if($seatpassenger_per_month_2017[$i] != null){
+				$passenger_per_month = $seatpassenger_per_month_2017[$i]->passengers;			
+
+				if(($seatpassenger_per_bulan_2017 * 0.8) < $passenger_per_month){
+					$keramaian_all_month[$i] = 'Tinggi';
+
+				}else if(($seatpassenger_per_bulan_2017 * 0.7) > $passenger_per_month){
+					$keramaian_all_month[$i] = 'Rendah';
+				}else{
+					$keramaian_all_month[$i] = 'Sedang';
+				}	
+			}else{
+				$keramaian_all_month[$i] = 'Tidak Ada'; 
+			}
 		}
 	
 		$prediksi_pass_all_month = collect($prediksi_pass_all_month);
 		$prediksi_seat_all_month = collect($prediksi_seat_all_month);
 		$prediksi_pass_all_month_2017 = collect($prediksi_pass_all_month_2017);
 		$keramaian_all_month = collect($keramaian_all_month);
-
-
-
-		//  dd($pass_all_month_json_2017);
+		$seatpassenger_per_month_2017 = collect($seatpassenger_per_month_2017);
+		dd($seatpassenger_per_month_2017);
 
 
 		$year = Input::get('year');
@@ -225,7 +232,7 @@ class TestController extends Controller {
 		//dd($pass_all_month_json_2017);
 
 
-		return view("test" , array('prediksi_pass_all_month' => $prediksi_pass_all_month, 'prediksi_pass_all_month_2017' => $prediksi_pass_all_month_2017, 'pass_all_month_json_2017' => $pass_all_month_json_2017, 'keramaian_all_month' => $keramaian_all_month));
+		return view("test" , array('prediksi_pass_all_month' => $prediksi_pass_all_month, 'prediksi_pass_all_month_2017' => $prediksi_pass_all_month_2017, 'pass_all_month_json_2017' => $pass_all_month_json_2017, 'keramaian_all_month' => $keramaian_all_month, 'seatpassenger_per_month_2017' => $seatpassenger_per_month_2017));
 
 
 					/*  contoh ambil variable dari controller , bikin ini di blade

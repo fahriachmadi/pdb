@@ -367,6 +367,7 @@ $(document).ready(function() {
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tabel Keramaian</h3>
+                     <h3 class="box-title">Tahun 2017</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                         <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
@@ -377,14 +378,18 @@ $(document).ready(function() {
                     <table class="table table-bordered">
                         <tr>
                             <th>Bulan</th>
-                            <th>Passenger</th>
+                            <th>Jumlah Penumpang</th>
                             <th>Tingkat Keramaian</th>
                         </tr>
-                    @isset($prediksi_pass_all_month)
-                    @foreach($prediksi_pass_all_month as $index => $value)
+                    @isset($seatpassenger_per_month_2017)
+                    @foreach($seatpassenger_per_month_2017 as $index => $value)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $prediksi_pass_all_month[$index] }}</td>
+                            @if($seatpassenger_per_month_2017[$index] !== null)
+                            <td>{{ $seatpassenger_per_month_2017[$index]->passengers }}</td>
+                            @else
+                            <td>-</td>
+                            @endif
                             <td>{{ $keramaian_all_month[$index] }}</td>
                         </tr>
                     @endforeach
